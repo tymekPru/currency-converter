@@ -14,9 +14,9 @@ html {
     max-width: 500px;
     margin: 0 auto;
     background-color: #222222;
+    background-image: url("../images/stock-market-chart-technology-blue-background.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
     font-size: 20px;
-}
-
-.container {
-    margin-left: 20px;
 }
