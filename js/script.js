@@ -1,86 +1,54 @@
-let amountElement = document.querySelector(".js-amount");
-let inputCurrencyElement = document.querySelector(".js-inputCurrency");
-let outputCurrencyElement = document.querySelector(".js-outputCurrency");
-let convertedValueElement = document.querySelector(".js-convertedValue");
-let form = document.querySelector(".form");
-let exchangeRateElement = document.querySelector(".js-exchangeRate");
+{
+    const calculatedResult = (input, output) => {
+        const currencyPair = `${input}/${output}`;
+        switch (currencyPair) {
+            case "PLN/USD":
+                return 0.219260;
+            case "PLN/EUR":
+                return 0.211613;
+            case "USD/PLN":
+                return 4.55980;
+            case "USD/EUR":
+                return 0.964879;
+            case "EUR/USD":
+                return 1.03640;
+            case "EUR/PLN":
+                return 4.72511;
+            default:
+                return 1;
+        }
+    };
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    let amountButString = amountElement.value;
-    let amount = Number(amountButString).toFixed(2);
-    let input = inputCurrencyElement.value;
-    let output = outputCurrencyElement.value;
-
-    switch (inputCurrencyElement.value) {
-        case "PLN":
-            if (output === "USD") {
-                let exchangeRate = 0.219260;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-            if (output === "EUR") {
-                let exchangeRate = 0.211613;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-            if (output === "PLN") {
-                let exchangeRate = 1;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-        case "USD":
-            if (output === "USD") {
-                let exchangeRate = 1;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-            if (output === "EUR") {
-                let exchangeRate = 0.964879;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-            if (output === "PLN") {
-                let exchangeRate = 4.55980;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-        case "EUR":
-            if (output === "USD") {
-                let exchangeRate = 1.03640;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-            if (output === "EUR") {
-                let exchangeRate = 1;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-            if (output === "PLN") {
-                let exchangeRate = 4.72511;
-                let value = amount * exchangeRate;
-                convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
-                exchangeRateElement.innerText = exchangeRate;
-                break;
-            }
-
+    const updateResultText = (amount, input, value, output, exchangeRate) => {
+        const convertedValueElement = document.querySelector(".js-convertedValue");
+        const exchangeRateElement = document.querySelector(".js-exchangeRate");
+        convertedValueElement.innerText = `${amount} ${input} = ${value.toFixed(2)} ${output}`;
+        exchangeRateElement.innerText = exchangeRate;
     }
-})
 
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+
+        const amountElement = document.querySelector(".js-amount");
+        const inputCurrencyElement = document.querySelector(".js-inputCurrency");
+        const outputCurrencyElement = document.querySelector(".js-outputCurrency");
+
+        const amount = +amountElement.value;
+        const input = inputCurrencyElement.value;
+        const output = outputCurrencyElement.value;
+
+        const exchangeRate = calculatedResult(input, output);
+
+        const value = amount * exchangeRate;
+
+        updateResultText(amount, input, value, output, exchangeRate);
+    };
+
+    const init = () => {
+        const formElement = document.querySelector(".js-form");
+
+        formElement.addEventListener("submit", onFormSubmit);
+    };
+
+    init();
+}
