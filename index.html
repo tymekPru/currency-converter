@@ -21,13 +21,14 @@
 </head>
 
 <body class="body">
-    <form class="form">
+    <form class="form js-form">
         <fieldset class="form__fieldset">
             <legend class="form__fieldsetLegend">Przelicznik walut na dzień 15.11.2022</legend>
             <p>
                 <label class="form__label">
-                    <span class="form__labelText">Wartość: </span><input
-                        class="form__labelText js-amount form__labelInputWindow" type="number" min="1" step="any">
+                    <span class="form__labelText">Wartość*: </span><input
+                        class="form__labelText js-amount form__labelInputWindow" type="number" min="1" step="0.01"
+                        required>
                 </label>
             </p>
             <p>
