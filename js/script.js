@@ -1,5 +1,5 @@
 {
-    const calculatedResult = (input, output) => {
+    const calculateResult = (input, output) => {
         const currencyPair = `${input}/${output}`;
         switch (currencyPair) {
             case "PLN/USD":
@@ -37,7 +37,7 @@
         const input = inputCurrencyElement.value;
         const output = outputCurrencyElement.value;
 
-        const exchangeRate = calculatedResult(input, output);
+        const exchangeRate = calculateResult(input, output);
 
         const value = amount * exchangeRate;
 
